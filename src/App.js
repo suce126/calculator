@@ -113,13 +113,26 @@ class App extends Component {
   };
 
   lastResult = () => {
+    let number = this.state.result
+    let len = number.length - 1
+    let newNumber = number.substring(0,len)
+    
     this.setState({
-      result:
-        this.state.resultHistory.length > 0
-          ? this.state.resultHistory.slice(-1)
-          : "0"
-    });
+      result: newNumber.length > 0 ? newNumber : '0'
+    })
   };
+
+  // function backSpace() {
+  
+  //   var number = box.value;
+    
+  //   var len = number.length - 1;
+    
+  //   var newNumber = number.substring( 0, len );
+    
+  //   box.value = newNumber;
+  
+  // } 
 
   // this.state.result === "0"
   //             ? buttonName
