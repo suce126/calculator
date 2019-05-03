@@ -14,7 +14,7 @@ class App extends Component {
     result2: "0",
     operator: null,
     resultHistory: [],
-    i:'AC'
+    i: "AC"
   };
 
   buttonPressed = buttonName => {
@@ -49,7 +49,8 @@ class App extends Component {
               ? buttonName
               : this.state.result + buttonName
         });
-      } else {
+      }
+       else {
         this.setState({
           result2:
             this.state.result2 === "0"
@@ -109,17 +110,18 @@ class App extends Component {
         this.setState({
           resultHistory: [...this.state.resultHistory, this.state.result]
         });
-      });
+      })
+       
   };
 
   lastResult = () => {
-    let number = this.state.result.toString()
-    let len = number.length - 1
-    let newNumber = number.substr(0,len)
-    
+    let number = this.state.result.toString();
+    let len = number.length - 1;
+    let newNumber = number.substr(0, len);
+
     this.setState({
-      result: newNumber.length > 0 ? newNumber : '0'
-    })
+      result: newNumber.length > 0 ? newNumber : "0"
+    });
   };
 
   percent = () => {
@@ -166,15 +168,9 @@ class App extends Component {
 
   updateResult = e => {
     this.setState({
-      result : e
-    })
-  }
-
-  // componentDidUpdate() {
-  //     this.setState({
-  //       i: this.state.result !=='0' ?'C' :'AC'
-  //     })
-  // }
+      result: e
+    });
+  };
 
   render() {
     let num;
@@ -188,8 +184,11 @@ class App extends Component {
         {num}
         {/* <Display ref={this.display} result={this.state.result} /> */}
 
-        <Button buttonPressed={this.buttonPressed} i={this.state.i}/>
-        <History resultHistory={this.state.resultHistory} updateResult={this.updateResult}/>
+        <Button buttonPressed={this.buttonPressed} i={ this.state.result > 0 ? 'C' : this.state.i} />
+        <History
+          resultHistory={this.state.resultHistory}
+          updateResult={this.updateResult}
+        />
       </div>
     );
   }
