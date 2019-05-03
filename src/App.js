@@ -11,7 +11,8 @@ class App extends Component {
   // }
   state = {
     result: "0",
-    result2: "0",
+    num1: "0",
+    num2: "0",
     operator: null,
     resultHistory: [],
     i: "AC"
@@ -44,18 +45,13 @@ class App extends Component {
     else if (typeof parseInt(buttonName) === "number") {
       if (this.state.operator === null) {
         this.setState({
-          result:
-            this.state.result === "0"
-              ? buttonName
-              : this.state.result + buttonName
+          num1:
+            this.state.num1 === "0" ? buttonName : this.state.num1 + buttonName
         });
-      }
-       else {
+      } else {
         this.setState({
-          result2:
-            this.state.result2 === "0"
-              ? buttonName
-              : this.state.result2 + buttonName
+          num2:
+            this.state.num2 === "0" ? buttonName : this.state.num2 + buttonName
         });
       }
     }
@@ -64,7 +60,8 @@ class App extends Component {
   reset = () => {
     this.setState({
       result: "0",
-      result2: "0",
+      num1: "0",
+      num2: "0",
       operator: null
     });
   };
@@ -74,34 +71,34 @@ class App extends Component {
       .then(() => {
         if (this.state.operator === "+") {
           this.setState({
-            result:
-              parseFloat(this.state.result) + parseFloat(this.state.result2),
+            result: parseFloat(this.state.num1) + parseFloat(this.state.num2),
             operator: null,
-            result2: "0"
+            num1: "0",
+            num2: "0"
           });
         } else if (this.state.operator === "-") {
           this.setState({
-            result:
-              parseFloat(this.state.result) - parseFloat(this.state.result2),
+            result: parseFloat(this.state.num1) - parseFloat(this.state.num2),
             operator: null,
-            result2: "0"
+            num1: "0",
+            num2: "0"
           });
         } else if (this.state.operator === "X") {
           this.setState({
-            result:
-              parseFloat(this.state.result) * parseFloat(this.state.result2),
+            result: parseFloat(this.state.num1) * parseFloat(this.state.num2),
             operator: null,
-            result2: "0"
+            num1: "0",
+            num2: "0"
           });
         } else if (this.state.operator === "/") {
-          if (this.state.result2 === "0") {
-            this.setState({ result2: "Error" });
+          if (this.state.num2 === "0") {
+            this.setState({ num2: "Error" });
           } else {
             this.setState({
-              result:
-                parseFloat(this.state.result) / parseFloat(this.state.result2),
+              result: parseFloat(this.state.num1) / parseFloat(this.state.num2),
               operator: null,
-              result2: "0"
+              num1: "0",
+              num2: "0"
             });
           }
         }
@@ -110,24 +107,45 @@ class App extends Component {
         this.setState({
           resultHistory: [...this.state.resultHistory, this.state.result]
         });
-      })
-       
+      });
   };
 
   lastResult = () => {
-    let number = this.state.result.toString();
-    let len = number.length - 1;
-    let newNumber = number.substr(0, len);
+    if (this.state.num1 !== "0" && this.state.num2 === "0") {
+      let number = this.state.num1.toString();
+      let len = number.length - 1;
+      let newNumber = number.substr(0, len);
 
-    this.setState({
-      result: newNumber.length > 0 ? newNumber : "0"
-    });
+      this.setState({
+        num1: newNumber.length > 0 ? newNumber : "0"
+      }) 
+    } else if (this.state.num2 !== "0"){
+      let number = this.state.num2.toString();
+      let len = number.length - 1;
+      let newNumber = number.substr(0, len);
+
+      this.setState({
+        num2: newNumber.length > 0 ? newNumber : "0"
+      }) 
+    } else {
+      let number = this.state.result.toString();
+      let len = number.length - 1;
+      let newNumber = number.substr(0, len);
+
+      this.setState({
+        result: newNumber.length > 0 ? newNumber : "0"
+      }) 
+    }
   };
 
   percent = () => {
-    this.setState({
-      result: this.state.result * 0.01
-    });
+    this.state.result === "0"
+      ? this.setState({
+          num1: this.state.num1 * 0.01
+        })
+      : this.setState({
+          result: this.state.result * 0.01
+        });
   };
 
   plus = () => {
@@ -155,36 +173,50 @@ class App extends Component {
   };
 
   plusminus = () => {
-    this.setState({
-      result: this.state.result * -1
-    });
+    this.state.result === "0"
+      ? this.setState({
+          num1: this.state.num1 * -1
+        })
+      : this.setState({
+          result: this.state.result * -1
+        });
   };
 
   squareRoot = () => {
-    this.setState({
-      result: Math.sqrt(this.state.result).toString()
-    });
+    this.state.result === "0"
+      ? this.setState({
+          num1: Math.sqrt(this.state.num1).toString()
+        })
+      : this.setState({
+          result: Math.sqrt(this.state.result).toString()
+        });
   };
 
   updateResult = e => {
     this.setState({
-      result: e
+      num1: e
     });
   };
 
   render() {
     let num;
-    if (this.state.operator === null) {
+    if (this.state.num1 === "0" && this.state.num2 === "0") {
       num = <Display result={this.state.result} />;
+    } else if (this.state.operator === null) {
+      num = <Display result={this.state.num1} />;
     } else {
-      num = <Display result={this.state.result2} />;
+      num = <Display result={this.state.num2} />;
     }
+
     return (
       <div className="App">
         {num}
         {/* <Display ref={this.display} result={this.state.result} /> */}
 
-        <Button buttonPressed={this.buttonPressed} i={ this.state.result > 0 ? 'C' : this.state.i} />
+        <Button
+          buttonPressed={this.buttonPressed}
+          i={this.state.num1 > 0 ? "C" : this.state.i}
+        />
         <History
           resultHistory={this.state.resultHistory}
           updateResult={this.updateResult}
