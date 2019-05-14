@@ -139,7 +139,7 @@ class App extends Component {
   };
 
   percent = () => {
-    this.state.result === "0"
+    this.state.num1 !== "0"
       ? this.setState({
           num1: this.state.num1 * 0.01
         })
@@ -173,7 +173,7 @@ class App extends Component {
   };
 
   plusminus = () => {
-    this.state.result === "0"
+    this.state.num1 !== "0"
       ? this.setState({
           num1: this.state.num1 * -1
         })
@@ -183,7 +183,7 @@ class App extends Component {
   };
 
   squareRoot = () => {
-    this.state.result === "0"
+    this.state.num1 !== "0"
       ? this.setState({
           num1: Math.sqrt(this.state.num1).toString()
         })
