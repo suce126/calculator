@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
-import Button from "./component/Button";
-import Display from "./component/Display";
-import History from "./component/History";
+import Button from "./component/button/button";
+import Display from "./component/display/display";
+import History from "./component/history/history";
 
 class App extends Component {
   // constructor(props) {
@@ -118,15 +118,15 @@ class App extends Component {
 
       this.setState({
         num1: newNumber.length > 0 ? newNumber : "0"
-      }) 
-    } else if (this.state.num2 !== "0"){
+      });
+    } else if (this.state.num2 !== "0") {
       let number = this.state.num2.toString();
       let len = number.length - 1;
       let newNumber = number.substr(0, len);
 
       this.setState({
         num2: newNumber.length > 0 ? newNumber : "0"
-      }) 
+      });
     } else {
       let number = this.state.result.toString();
       let len = number.length - 1;
@@ -134,7 +134,7 @@ class App extends Component {
 
       this.setState({
         result: newNumber.length > 0 ? newNumber : "0"
-      }) 
+      });
     }
   };
 
