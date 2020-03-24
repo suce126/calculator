@@ -1,0 +1,35 @@
+$mainOperatorButton-color: rgb(250, 105, 9);
+$mainOperatorButtonHover-color: rgb(250, 135, 10);
+$mainButton-color: rgb(220, 215, 210);
+$mainButtonHover-color: rgb(224, 220, 200);
+
+.Main-button {
+  margin: 0;
+  padding: 0;
+  position: center;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+#zero {
+  grid-area: 6 / span 2;
+  /* border-radius: 44%; */
+}
+
+#operator {
+  background-color: $mainOperatorButton-color;
+
+  &:hover {
+    background-color: $mainOperatorButtonHover-color;
+  }
+}
+
+button {
+  font-size: 4rem;
+  background-color: $mainButton-color;
+  outline: none;
+
+  &:hover {
+    background-color: $mainButtonHover-color;
+  }
+}
