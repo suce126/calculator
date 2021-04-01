@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./history.scss";
 
 export default class History extends Component {
   render() {
@@ -8,7 +9,7 @@ export default class History extends Component {
         <p>
           {resultHistory.map((s, i) => {
             return (
-              <li key={i} onClick={() => updateResult(s)}>
+              <li className="history" key={i} onClick={() => updateResult(s)}>
                 {s}
               </li>
             );

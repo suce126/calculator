@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import "./button.scss";
 
 export default class Button extends Component {
-  buttonPressed = e => {
-    //console.log(e.target.value);
+  buttonPressed = (e) => {
     this.props.buttonPressed(e.target.value);
   };
   render() {
