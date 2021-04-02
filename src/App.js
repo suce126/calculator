@@ -204,8 +204,6 @@ class App extends Component {
     return (
       <div className="App">
         {num}
-        {/* <Display ref={this.display} result={this.state.result} /> */}
-
         <Button
           buttonPressed={this.buttonPressed}
           i={this.state.num1 > 0 ? "C" : this.state.i}
